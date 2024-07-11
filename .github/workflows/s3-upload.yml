@@ -1,0 +1,24 @@
+name: Upload to S3
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "setup_mac_dev_env.sh"
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_GITHUB_ACTIONS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Upload file to S3
+        run: |
+          aws s3 cp setup_mac_dev_env.sh s3://dev-tibber-onboarding/public-scripts/setup_mac_dev_env.sh
