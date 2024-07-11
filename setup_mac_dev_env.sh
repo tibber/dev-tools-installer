@@ -153,7 +153,7 @@ main() {
   if (( missing_homebrew || missing_github_token || missing_aws_cli || missing_ssh_config || missing_aws_vpn_client || missing_aws_config )); then
     prompt_install
   else
-    echo -e "\n🥳 All checks passed!v1"
+    echo -e "\n🥳 All checks passed!v2"
   fi
 }
 
